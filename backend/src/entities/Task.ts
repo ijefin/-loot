@@ -12,5 +12,5 @@ export class Task {
   description: string;
 
   @Column({ type: "boolean" })
-  done: boolean = false;
+  done: boolean;
 }

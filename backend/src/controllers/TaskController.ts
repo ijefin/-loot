@@ -13,7 +13,7 @@ export default class Tasks {
   };
 
   newTask = async (req: Request, res: Response) => {
-    const { name, description } = req.body;
+    const { name, description }: Task = req.body;
     const service = new CreateNewTaskService();
 
     if (name.length < 1) {
