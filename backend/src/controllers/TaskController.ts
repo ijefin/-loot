@@ -12,26 +12,24 @@ export default class Tasks {
     return res.status(200).json({ message: result });
   };
 
-  createNew = async (req: Request, res: Response) => {
-    const { name, description }: Task = req.body;
+  newTask = async (req: Request, res: Response) => {
+    const { name, description } = req.body;
     const service = new CreateNewTaskService();
 
     if (name.length < 1) {
-      res.status(400).json({
-        message: "Insira um nome válido",
-      });
+      res.status(400).json({ message: "Insira um nome válido para a tarefa!" });
       return;
     }
 
     if (description.length < 1) {
-      res.status(400).json({
-        message: "Insira uma descrição válida",
-      });
+      res.status(400).json({ message: "Insira uma breve descrição!" });
       return;
     }
 
-    const result = { name, description };
+    const createdTask = await service.execute({ name, description });
 
-    await service.execute(result);
+    return res
+      .status(201)
+      .json({ message: "Tarefa criado com sucesso!", createdTask });
   };
 }
