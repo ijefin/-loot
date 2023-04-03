@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { GetAllTasksService } from "../services/GetAllTasksServices";
 import { CreateNewTaskService } from "../services/CreateNewTaskService";
+import { TaskValidator } from "../validator/TaskValidator";
 import { Task } from "../entities/Task";
 
 export default class Tasks {
@@ -13,7 +14,7 @@ export default class Tasks {
   };
 
   newTask = async (req: Request, res: Response) => {
-    const { name, description }: Task = req.body;
+    const { name, description, done }: Task = req.body;
     const service = new CreateNewTaskService();
 
     if (name.length < 1) {
@@ -23,6 +24,16 @@ export default class Tasks {
 
     if (description.length < 1) {
       res.status(400).json({ message: "Insira uma breve descrição!" });
+      return;
+    }
+
+    if (await TaskValidator(name)) {
+      res
+        .status(400)
+        .json({
+          message:
+            "Uma tarefa com este nome já foi cadastrada e ainda não foi finalizada.",
+        });
       return;
     }
 
