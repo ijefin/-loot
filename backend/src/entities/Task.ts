@@ -10,4 +10,7 @@ export class Task {
 
   @Column({ type: "text" })
   description: string;
+
+  @Column({ type: "boolean" })
+  done: boolean = false;
 }
