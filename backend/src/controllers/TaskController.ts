@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { GetAllTasksService } from "../services/GetAllTasksServices";
 import { CreateNewTaskService } from "../services/CreateNewTaskService";
+import { UpdateTaskService } from "../services/UpdateTaskService";
 import { TaskValidator } from "../validator/TaskValidator";
 import { Task } from "../entities/Task";
 
@@ -14,7 +15,7 @@ export default class Tasks {
   };
 
   newTask = async (req: Request, res: Response) => {
-    const { name, description, done }: Task = req.body;
+    const { name, description }: Task = req.body;
     const service = new CreateNewTaskService();
 
     if (name.length < 1) {
@@ -28,12 +29,10 @@ export default class Tasks {
     }
 
     if (await TaskValidator(name)) {
-      res
-        .status(400)
-        .json({
-          message:
-            "Uma tarefa com este nome já foi cadastrada e ainda não foi finalizada.",
-        });
+      res.status(400).json({
+        message:
+          "Uma tarefa com este nome já foi cadastrada e ainda não foi finalizada.",
+      });
       return;
     }
 
@@ -42,5 +41,17 @@ export default class Tasks {
     return res
       .status(201)
       .json({ message: "Tarefa criado com sucesso!", createdTask });
+  };
+
+  updateTask = async (req: Request, res: Response) => {
+    const { name, description } = req.body;
+    const { id } = req.params;
+    const service = new UpdateTaskService();
+
+    const updatedTask = await service.execute({ id, name, description });
+
+    return res
+      .status(200)
+      .json({ message: "Task atualizada com sucesso!", updatedTask });
   };
 }
