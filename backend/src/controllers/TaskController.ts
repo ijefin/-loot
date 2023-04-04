@@ -2,8 +2,10 @@ import { Request, Response } from "express";
 import { GetAllTasksService } from "../services/GetAllTasksServices";
 import { CreateNewTaskService } from "../services/CreateNewTaskService";
 import { UpdateTaskService } from "../services/UpdateTaskService";
-import { TaskValidator } from "../validator/TaskValidator";
+import { TaskManager } from "../repositories/taskRepository";
 import { Task } from "../entities/Task";
+
+const taskManager = new TaskManager();
 
 export default class Tasks {
   getAll = async (req: Request, res: Response) => {
@@ -28,7 +30,7 @@ export default class Tasks {
       return;
     }
 
-    if (await TaskValidator(name)) {
+    if (await taskManager.getOneByName(name)) {
       res.status(400).json({
         message:
           "Uma tarefa com este nome já foi cadastrada e ainda não foi finalizada.",
