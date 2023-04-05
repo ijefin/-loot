@@ -1,10 +1,9 @@
 .main-home-container {
-  width: 120vh;
-  height: 100vh;
   border-radius: 20px;
   display: flex;
-  justify-content: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  width: 120vh;
 }
 
 .title {
@@ -12,19 +11,67 @@
 }
 
 .add-new-task {
-  margin-top: 40px;
+  margin-top: 60px;
+}
+
+.add-new-task button {
+  margin-top: 30px;
+}
+
+.button-text {
+  margin-right: 10px;
 }
 
 .add-new {
-  width: 150px;
-  height: 30px;
+  width: 180px;
+  height: 45px;
   outline: none;
   border: none;
-  background-color: blue;
+  background-color: #0059f7;
+  border-radius: 5px;
   color: #fff;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  transition-duration: 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fa-solid {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.add-new:hover {
+  background-color: #fff;
+  color: black;
+}
+
+#myFadeAnimation {
+  animation-name: fade;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fade {
+  0% {
+    opacity: hidden;
+    transform: translateX(50%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(50%);
+  }
+}
+
+.image-container img {
+  width: 700px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -33,5 +80,9 @@
     height: 85vh;
     display: flex;
     flex-direction: column;
+  }
+
+  .image-container img {
+    max-width: 45vh;
   }
 }
