@@ -6,7 +6,7 @@ export const taskRepository = appDataSource.getRepository(Task);
 export class TaskManager {
   getAllTasks = async () => taskRepository.find();
 
-  getOneByName = async (name: string) => {
+  getUnfinishedByName = async (name: string) => {
     return taskRepository
       .createQueryBuilder()
       .select("tasks.name")

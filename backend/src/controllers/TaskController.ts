@@ -4,8 +4,11 @@ import { CreateNewTaskService } from "../services/CreateNewTaskService";
 import { UpdateTaskService } from "../services/UpdateTaskService";
 import { TaskManager } from "../repositories/taskRepository";
 import { Task } from "../entities/Task";
-
-const taskManager = new TaskManager();
+import {
+  verifyEmptyDescription,
+  verifyEmptyName,
+  verifyTaskExistence,
+} from "../validators/taskValidator";
 
 export default class Tasks {
   getAll = async (req: Request, res: Response) => {
@@ -20,20 +23,20 @@ export default class Tasks {
     const { name, description }: Task = req.body;
     const service = new CreateNewTaskService();
 
-    if (name.length < 1) {
-      res.status(400).json({ message: "Insira um nome válido para a tarefa!" });
+    if (await verifyEmptyName(name)) {
+      res.status(400).json({ message: "Digite um nome válido para a tarefa!" });
       return;
     }
 
-    if (description.length < 1) {
-      res.status(400).json({ message: "Insira uma breve descrição!" });
+    if (await verifyEmptyDescription(description)) {
+      res.status(400).json({ message: "Digite uma descrição válida!" });
       return;
     }
 
-    if (await taskManager.getOneByName(name)) {
+    if (await verifyTaskExistence(name)) {
       res.status(400).json({
         message:
-          "Uma tarefa com este nome já foi cadastrada e ainda não foi finalizada.",
+          "Já existe uma tarefa com este nome e ainda não foi finalizada!",
       });
       return;
     }
@@ -49,6 +52,24 @@ export default class Tasks {
     const { name, description } = req.body;
     const { id } = req.params;
     const service = new UpdateTaskService();
+
+    if (await verifyEmptyName(name)) {
+      res.status(400).json({ message: "Digite um nome válido para a tarefa!" });
+      return;
+    }
+
+    if (await verifyEmptyDescription(description)) {
+      res.status(400).json({ message: "Digite uma descrição válida!" });
+      return;
+    }
+
+    if (await verifyTaskExistence(name)) {
+      res.status(400).json({
+        message:
+          "Já existe uma tarefa com este nome e ainda não foi finalizada!",
+      });
+      return;
+    }
 
     const updatedTask = await service.execute({ id, name, description });
 
