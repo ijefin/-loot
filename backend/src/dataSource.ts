@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { DataSource } from "typeorm";
+import { Task } from "./entities/Task";
 
 const port = process.env.DB_PORT as number | undefined;
 
@@ -10,7 +11,7 @@ const appDataSource = new DataSource({
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  entities: [`${__dirname}/**/entities/*.{ts, js}`], //allows you to search all files regardless of their extension js or ts
+  entities: [Task],
   migrations: [`${__dirname}/**/migrations/*.{ts, js}`],
 });
 
