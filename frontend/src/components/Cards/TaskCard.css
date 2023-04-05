@@ -1,20 +1,95 @@
 .task-card {
   margin: 5px;
   width: 20vh;
-  height: 15vh;
+  height: 30vh;
   border-radius: 15px;
-  border: 1px solid #fff;
 }
 
 .task-title {
-  background-color: rgb(211, 145, 115);
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
+  background-color: #cb520c;
+  height: 15vh;
 }
 
-.task-title p {
-  margin-top: -0.5px;
-  font-size: 25px;
-  flex-wrap: wrap;
+.card-body {
+  background-color: #f7f7f7;
+  height: 10vh;
 }
 
+.card-body p {
+  text-align: start;
+  color: black;
+  margin: 0px;
+  padding: 5px;
+}
+
+#test:after {
+  content: "\2807";
+  font-size: 15px;
+}
+
+.dropbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 85%;
+  margin-top: 5%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  width: 15vh;
+  height: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content button {
+  color: black;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 15vh;
+  display: block;
+  font-size: 15px;
+  font-weight: bolder;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.dropdown-content button:hover {
+  background-color: #0059f7;
+  color: #fff;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+#delete {
+  color: #ff0000;
+}
+
+#edit {
+  color: #fff700;
+}
+
+#done {
+  color: #fff700;
+}
