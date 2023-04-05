@@ -1,0 +1,37 @@
+.main-home-container {
+  width: 120vh;
+  height: 100vh;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.add-new-task {
+  margin-top: 40px;
+}
+
+.add-new {
+  width: 150px;
+  height: 30px;
+  outline: none;
+  border: none;
+  background-color: blue;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .main-home-container {
+    width: 35vh;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,9 +1,16 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Home } from "./views/Home/Home"
+
+
 export const App = () => {
   return (
     <>
-      <h1>
-        Olá mundo!
-      </h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+
     </>
   )
 }
