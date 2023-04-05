@@ -9,6 +9,9 @@ import {
   verifyEmptyName,
   verifyTaskExistence,
 } from "../validators/taskValidator";
+import { DeleteTaskService } from "../services/DeleteTaskById";
+
+const taskRepository = new TaskManager();
 
 export default class Tasks {
   getAll = async (req: Request, res: Response) => {
@@ -23,7 +26,7 @@ export default class Tasks {
     const { name, description }: Task = req.body;
     const service = new CreateNewTaskService();
 
-    if (await verifyEmptyName(name)) {
+    if ((await verifyEmptyName(name)) || typeof name !== typeof "") {
       res.status(400).json({ message: "Digite um nome válido para a tarefa!" });
       return;
     }
@@ -71,10 +74,33 @@ export default class Tasks {
       return;
     }
 
+    if (!(await taskRepository.getTaskById(parseInt(id)))) {
+      res.status(400).json({
+        message: "Houve um erro! Tarefa não encontrada..",
+      });
+      return;
+    }
+
     const updatedTask = await service.execute({ id, name, description });
 
     return res
       .status(200)
       .json({ message: "Task atualizada com sucesso!", updatedTask });
+  };
+
+  deleteTask = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const service = new DeleteTaskService();
+
+    if (!(await taskRepository.getTaskById(parseInt(id)))) {
+      res.status(400).json({
+        message: "Erro ao deletar! Tarefa não encontrada..",
+      });
+      return;
+    }
+
+    await service.execute(parseInt(id));
+
+    return res.status(200).json({ message: "Task deletada com sucesso!" });
   };
 }

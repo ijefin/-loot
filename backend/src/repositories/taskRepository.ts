@@ -6,8 +6,17 @@ export const taskRepository = appDataSource.getRepository(Task);
 export class TaskManager {
   getAllTasks = async () => taskRepository.find();
 
+  getTaskById = async (id: number) => {
+    return await taskRepository
+      .createQueryBuilder()
+      .select("tasks.id")
+      .from(Task, "tasks")
+      .where("tasks.id = :id", { id: id })
+      .getOne();
+  };
+
   getUnfinishedByName = async (name: string) => {
-    return taskRepository
+    return await taskRepository
       .createQueryBuilder()
       .select("tasks.name")
       .from(Task, "tasks")
@@ -31,6 +40,15 @@ export class TaskManager {
       .createQueryBuilder()
       .update(Task)
       .set({ name: name, description: description })
+      .where("id = :id", { id })
+      .execute();
+  };
+
+  deleteTask = async (id: number) => {
+    taskRepository
+      .createQueryBuilder()
+      .delete()
+      .from(Task)
       .where("id = :id", { id })
       .execute();
   };
