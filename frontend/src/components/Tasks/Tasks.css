@@ -43,8 +43,8 @@
 .task-status-title {
   display: flex;
   justify-content: space-between;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 30vh;
+  margin-right: 30vh;
 }
 
 .done-tasks {

@@ -27,7 +27,6 @@ export const Tasks = () => {
                     <TaskCard />
                     <TaskCard />
                 </div>
-                <hr />
                 <div className="not-done-tasks">
                     <TaskCard />
                     <TaskCard />

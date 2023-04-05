@@ -5,7 +5,7 @@ import { useFetch } from "../../hooks/useFetch"
 
 export const TaskCard = () => {
 
-    const url = "http://localhost:3000/all-tasks";
+    const url = "http://localhost:3030/all-tasks";
 
     const { data: tasks, loading, error } = useFetch(url)
 
