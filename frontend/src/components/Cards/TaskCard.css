@@ -1,0 +1,20 @@
+.task-card {
+  margin: 5px;
+  width: 20vh;
+  height: 15vh;
+  border-radius: 15px;
+  border: 1px solid #fff;
+}
+
+.task-title {
+  background-color: rgb(211, 145, 115);
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+.task-title p {
+  margin-top: -0.5px;
+  font-size: 25px;
+  flex-wrap: wrap;
+}
+
