@@ -1,7 +1,8 @@
 .task-card {
   margin: 10px;
   width: 25vh;
-  height: 15vh;
+  min-height: 18vh;
+  max-height: 25vh;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -14,11 +15,26 @@
   align-items: center;
 }
 
-.card-body p {
-  text-align: start;
-  color: black;
-  margin: 0px;
+.task-title h2 {
+  background-color: #dfd4f8;
   padding: 5px;
+  border-radius: 12px;
+  color: #6928f6;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 50%;
+  max-height: 50%;
+}
+
+.card-checkbox {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+  height: 50px;
 }
 
 #dots:after {

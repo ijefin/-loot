@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Home } from "./views/Home/Home"
 import { TasksPanel } from "./views/TaskPanel/TasksPanel"
+import "bootswatch/dist/superhero/bootstrap.min.css"
 
 
 export const App = () => {
