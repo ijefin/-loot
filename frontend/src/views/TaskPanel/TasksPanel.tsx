@@ -4,7 +4,7 @@ import { Tasks } from '../../components/Tasks/Tasks'
 export const TasksPanel = () => {
     return (
         <>
-            <div className="task-panel-container">
+            <div className="container-fluid">
                 <Tasks />
             </div>
         </>

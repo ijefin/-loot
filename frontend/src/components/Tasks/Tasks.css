@@ -1,3 +1,82 @@
+.top-content {
+  margin-top: 5vh;
+  background-color: #3206f5;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
 
+.top-content .task-search input {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  width: 25vh;
+  padding: 5px;
+  caret-color: #3206f5;
+}
 
-/* background-color: #5205f7; */
+.top-content .new-task button {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: #03a832;
+  width: 15vh;
+  padding: 5px;
+}
+
+.task-container {
+  background-color: #edf0f8; 
+  min-height: 70vh;
+  color: #000;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.task-status {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.task-status h3 {
+  font-weight: 800;
+}
+
+.task-card-container {
+  flex-wrap: wrap;
+  display: flex;
+  margin: 10px;
+}
+
+@media only screen and (max-width: 950px) {
+  .top-content {
+    margin-top: 5vh;
+    background-color: #3206f5;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .top-content .task-search input {
+    width: 15vh;
+    padding: 3px;
+    caret-color: #3206f5;
+  }
+
+  .top-content .new-task button {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #59cf06;
+    width: 10vh;
+  }
+}
+
+@media screen and (min-width: 600px) and (orientation: landscape) {
+}
