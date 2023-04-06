@@ -1,14 +1,6 @@
-.task-container {
-  border-radius: 25px;
-  width: 180vh;
-  display: flex;
-  height: auto;
-  /* border: 2px solid #132256; */
-}
-
 .task-container-title {
-  background-color: #0059f7;
-  height: 50px;
+  background-color: #5205f7;
+  height: 70px;
   width: 100%;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
@@ -17,16 +9,54 @@
   align-items: center;
 }
 
-.task-container-title p {
+.task-container {
+  width: 180vh;
+  display: flex;
+  height: 80vh;
+  justify-content: space-around;
+  /* border: 2px solid #132256; */
+  background-color: #ebf1f8;
+  color: #000;
+}
+
+.task-container-title h1 {
   margin-left: 15px;
+}
+
+.status-title {
+  margin-left: 35%;
+}
+
+.no-data-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  max-height: 30vh;
+  margin-right: 8%;
+}
+
+.in-progress {
+  display: flex;
+}
+
+.task-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.cards-container {
+  width: 100%;
 }
 
 .task-container-title input {
   border: none;
   outline: none;
   padding: 8px;
-  width: 30vh;
-  border-radius: 55px;
+  margin-right: 30vh;
+  width: 50vh;
+  border-radius: 5px;
 }
 
 .task-container-title button {
@@ -40,11 +70,8 @@
   color: #fff;
 }
 
-.task-status-title {
-  display: flex;
-  justify-content: space-between;
-  margin-left: 30vh;
-  margin-right: 30vh;
+.not-done-title {
+  text-align: center;
 }
 
 .done-tasks {

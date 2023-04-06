@@ -1,36 +1,35 @@
 import "./TaskCard.css"
 import { useState, useEffect } from "react"
-import { useFetch } from "../../hooks/useFetch"
 
+interface Task {
+    name: string
+    description: string
+    done?: boolean
+}
 
-export const TaskCard = () => {
-
-    const url = "http://localhost:3030/all-tasks";
-
-    const { data: tasks, loading, error } = useFetch(url)
-
-    console.log(tasks)
+export const TaskCard = ({ name, description, done }: Task) => {
 
     return (
         <>
-            <div className="task-card">
-                <div className="task-title">
-                    <h1>Limpar o quarto</h1>
-                </div>
-                <div className="card-body">
-                    <p>Limpar a o quarto e guardar as roupas</p>
-                    <div className="dropdown">
-                        <button id="test" className="dropbtn"></button>
-                        <div className="dropdown-content">
-                            <button >Apagar <i id='delete' className="fa-solid fa-trash"></i></button>
-                            <button >Editar <i id='edit' className="fa-solid fa-edit"></i></button>
-                            <button >Concluído <i id='done' className="fa-solid fa-check"></i></button>
+            {
+                <div className="task-card">
+                    <div className="task-title">
+                        <h1>{name}</h1>
+                        <div className="dropdown">
+                            <button id="dots" className="dropbtn"></button>
+                            <div className="dropdown-content">
+                                <button >Concluir <i id='done' className="fa-solid fa-check"></i></button>
+                                <button >Editar <i id='edit' className="fa-solid fa-edit"></i></button>
+                                <button >Apagar <i id='delete' className="fa-solid fa-trash"></i></button>
+                            </div>
                         </div>
-
+                    </div>
+                    <div className="card-body">
+                        <p>{description}</p>
                     </div>
                 </div>
-
-            </div>
+            }
         </>
     )
 }
+

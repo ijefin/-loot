@@ -3,7 +3,8 @@ import { useState, useEffect } from "react"
 // custom hook
 export const useFetch = (url: string) => {
 
-    const [data, setData] = useState([])
+
+    const [data, setData]: any = useState()
     const [config, setConfig]: any = useState(null)
     const [method, setMethod]: any = useState(null)
     const [callFetch, setCallFetch] = useState(false)
@@ -43,9 +44,9 @@ export const useFetch = (url: string) => {
             setLoading(true)
 
             try {
-                const res = await fetch(url)
+                const response = await fetch(url)
 
-                const json = await res.json()
+                const json = await response.json()
                 setData(json)
 
             } catch (error) {
