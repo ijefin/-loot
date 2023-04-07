@@ -19,7 +19,7 @@ export default class Tasks {
 
     const result = await service.execute();
 
-    return res.status(200).json({ result });
+    return res.status(200).json(result);
   };
 
   newTask = async (req: Request, res: Response) => {
