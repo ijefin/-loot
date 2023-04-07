@@ -74,6 +74,11 @@ form {
   color: #000;
 }
 
+.task-container {
+  height: 60vh;
+  padding: 5px;
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     display: flex;

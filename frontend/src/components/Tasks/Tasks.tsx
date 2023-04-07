@@ -39,18 +39,19 @@ export const Tasks = () => {
                             </ul>
                         </div>
                         <hr />
-                        <div style={{ overflow: "auto" }} className="task-container">
-                            <TaskCard name="test" description="test" />
-                            <TaskCard name="test" description="test" />
-                            <TaskCard name="test" description="test" />
-                            <TaskCard name="test" description="test" />
-                            <TaskCard name="test" description="test" />
-                            <TaskCard name="test" description="test" />
-                            <TaskCard name="test" description="test" />
-                            <TaskCard name="test" description="test" />
-                            <TaskCard name="test" description="test" />
-                            <TaskCard name="test" description="test" />
-                            <TaskCard name="test" description="test" />
+                        <div style={{ overflow: "auto" }} className="test">
+                            <div className="task-container">
+                                <TaskCard name="test" description="test" />
+                                <TaskCard name="test" description="test" />
+                                <TaskCard name="test" description="test" />
+                                <TaskCard name="test" description="test" />
+                                <TaskCard name="test" description="test" />
+                                <TaskCard name="test" description="test" />
+                                <TaskCard name="test" description="test" />
+                                <TaskCard name="test" description="test" />
+                                <TaskCard name="test" description="test" />
+                                <TaskCard name="test" description="test" /> 
+                            </div>
                         </div>
                     </div>
                 </div>
