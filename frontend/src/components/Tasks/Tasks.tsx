@@ -33,14 +33,12 @@ export const Tasks = () => {
         setTaskdescription("")
     }
 
-    const handleDelete = (id: number) => {
+    const handleDelete = () => {
 
-        setTaskId(id)
+        const selectedId = taskId.id
 
-        httpConfig(taskId, "DELETE")
+        httpConfig(selectedId, "DELETE")
     }
-
-    console.log(taskId)
 
     return (
         <>
@@ -65,7 +63,8 @@ export const Tasks = () => {
                             ></button>
                         </div>
                         <div className="modal-body">
-                            Content
+                            <h1>{taskId?.name}</h1>
+                            <p>{taskId?.description}</p>
                         </div>
                         <div className="modal-footer">
                             <button
@@ -81,6 +80,7 @@ export const Tasks = () => {
                                 type="button"
                                 className="btn"
                                 data-bs-dismiss="modal"
+                                onClick={handleDelete}
                             >
                                 Confirmar
                             </button>
@@ -114,7 +114,7 @@ export const Tasks = () => {
                                     {loading && <h3>Carregando tarefas..</h3>}
                                     {
                                         task && task.map((tasks: task) => (
-                                            <TaskCard updateFunc={() => console.log(tasks)} deleteFunc={() => setTaskId(tasks.id)} key={tasks.id} name={tasks.name} description={tasks.description} />
+                                            <TaskCard updateFunc={() => console.log(tasks)} deleteFunc={() => setTaskId(tasks)} key={tasks.id} name={tasks.name} description={tasks.description} />
                                         ))
                                     }
                                 </div>

@@ -3,8 +3,8 @@ import { useState, useEffect } from "react"
 import { useFetch } from "../../hooks/useFetch"
 
 interface Task {
-    deleteFunc: any
-    updateFunc: any
+    deleteFunc?: any
+    updateFunc?: any
     name: string
     description: string
     done?: boolean
