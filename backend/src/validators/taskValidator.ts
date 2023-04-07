@@ -3,12 +3,6 @@ import { TaskManager } from "../repositories/taskRepository";
 
 const taskManager = new TaskManager();
 
-export const verifyTaskExistence = async (name: string) => {
-  const getOne = await taskManager.getUnfinishedByName(name);
-
-  return getOne;
-};
-
 export const verifyEmptyName = async (name: string) => {
   const nameIsValid = name.length < 1;
 

@@ -7,7 +7,6 @@ import { Task } from "../entities/Task";
 import {
   verifyEmptyDescription,
   verifyEmptyName,
-  verifyTaskExistence,
 } from "../validators/taskValidator";
 import { DeleteTaskService } from "../services/DeleteTaskById";
 
@@ -36,19 +35,11 @@ export default class Tasks {
       return;
     }
 
-    if (await verifyTaskExistence(name)) {
-      res.status(400).json({
-        message:
-          "Já existe uma tarefa com este nome e ainda não foi finalizada!",
-      });
-      return;
-    }
-
     const createdTask = await service.execute({ name, description });
 
     return res
       .status(201)
-      .json({ message: "Tarefa criado com sucesso!", createdTask });
+      .json({ message: "Tarefa criada com sucesso!", createdTask });
   };
 
   updateTask = async (req: Request, res: Response) => {
@@ -63,14 +54,6 @@ export default class Tasks {
 
     if (await verifyEmptyDescription(description)) {
       res.status(400).json({ message: "Digite uma descrição válida!" });
-      return;
-    }
-
-    if (await verifyTaskExistence(name)) {
-      res.status(400).json({
-        message:
-          "Já existe uma tarefa com este nome e ainda não foi finalizada!",
-      });
       return;
     }
 
