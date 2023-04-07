@@ -24,15 +24,20 @@
   border-radius: 50px;
 }
 
+#check {
+  padding: 1px;
+  width: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
 .task-description {
   margin-left: 10px;
   margin-top: -5px;
 }
 
-.form-check-input[type="checkbox"] {
-  outline: none;
-  border: 1px solid rgb(140, 137, 137);
-}
 
 .task-options {
   display: flex;

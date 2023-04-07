@@ -17,8 +17,10 @@ export const Tasks = () => {
 
     const [name, setTaskName] = useState("")
     const [description, setTaskdescription] = useState("")
-    const [done, setDone] = useState(Boolean)
     const [selectedTask, setSelectedTask]: any = useState("")
+    const [isChecked, setIsChecked] = useState(false);
+
+    console.log(selectedTask.done)
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
@@ -41,22 +43,26 @@ export const Tasks = () => {
 
         httpConfig(selectedId, "DELETE")
     }
-
-
-    const handleUpdate = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault()
+    const handleUpdate = async (e: { preventDefault: () => void }) => {
+        e.preventDefault();
 
         const updatedTask = {
             id: selectedTask.id,
             name: name ? name : selectedTask.name,
-            description: description ? description : selectedTask.description
-        }
+            description: description ? description : selectedTask.description,
+            done: isChecked,
+            status: isChecked ? "Concluida" : "pending",
+        };
 
-        httpConfig(updatedTask, "PUT")
+        httpConfig(updatedTask, "PUT");
 
-        setTaskName("")
-        setTaskdescription("")
-    }
+        setTaskName("");
+        setTaskdescription("");
+    };
+
+    const handleOnChange = () => {
+        setIsChecked(!isChecked);
+    };
 
     return (
         <>
@@ -106,7 +112,6 @@ export const Tasks = () => {
                     </div>
                 </div>
             </div >
-
             <div
                 className="modal fade"
                 id="update-modal"
@@ -130,6 +135,8 @@ export const Tasks = () => {
                         <div className="modal-body">
                             <input onChange={(e) => setTaskName(e.target.value)} defaultValue={selectedTask?.name} type="text" />
                             <input onChange={(e) => setTaskdescription(e.target.value)} defaultValue={selectedTask?.description} type="text" />
+                            <label htmlFor="done-checkbox">Marcar como concluído.</label>
+                            <input id="done-checkbox" onChange={handleOnChange} className="form-check-input" type="checkbox" />
                         </div>
                         <div className="modal-footer">
                             <button
@@ -179,7 +186,7 @@ export const Tasks = () => {
                                     {loading && <h3>Carregando tarefas..</h3>}
                                     {
                                         task && task.map((tasks: Task) => (
-                                            <TaskCard getTaskInfo={() => setSelectedTask(tasks)} key={tasks.id} name={tasks.name} description={tasks.description} />
+                                            <TaskCard done={handleOnChange} getTaskInfo={() => setSelectedTask(tasks)} key={tasks.id} name={tasks.name} description={tasks.description} />
                                         ))
                                     }
                                 </div>

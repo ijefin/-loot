@@ -37,6 +37,12 @@ form input {
   border-radius: 2px;
 }
 
+.form-check-input[type="checkbox"] {
+  outline: none;
+  border: 1px solid rgb(140, 137, 137);
+  margin-left: 10px;
+}
+
 form .done {
   width: 20%;
   background-color: #4253af;

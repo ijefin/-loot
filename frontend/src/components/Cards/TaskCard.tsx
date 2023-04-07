@@ -6,17 +6,18 @@ interface Task {
     getTaskInfo?: any
     name: string
     description: string
-    done?: boolean
+    done?: any
 }
 
 
+
 export const TaskCard = ({ getTaskInfo, name, description, done }: Task) => {
+
     return (
         <>
             {
                 <div className="task-card">
                     <div className="task-title">
-                        <input className="form-check-input" type="checkbox" />
                         <div className="task-options">
                             <h4>{name}</h4>
                             <div className="task-crud">
