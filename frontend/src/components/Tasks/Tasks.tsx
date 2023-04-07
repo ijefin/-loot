@@ -19,8 +19,6 @@ export const Tasks = () => {
     const [description, setTaskdescription] = useState("")
     const [done, setDone] = useState(Boolean)
     const [selectedTask, setSelectedTask]: Task | any = useState()
-    const [newName, setNewName] = useState()
-    const [newDescription, setNewDescription] = useState()
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
@@ -45,7 +43,16 @@ export const Tasks = () => {
 
     const handleUpdate = () => {
 
-        console.log(selectedTask)
+        const updatedTask = {
+            id: selectedTask.id,
+            name,
+            description
+        }
+
+        httpConfig(updatedTask, "PUT")
+
+        setTaskName("")
+        setTaskdescription("")
     }
 
     return (
@@ -150,8 +157,8 @@ export const Tasks = () => {
                             <h3>Adicionar nova tarefa</h3>
                         </label>
                         <form onSubmit={handleSubmit}>
-                            <input minLength={2} value={name} onChange={(e) => setTaskName(e.target.value)} type="text" placeholder="Nome/Categoria" />
-                            <input value={description} onChange={(e) => setTaskdescription(e.target.value)} type="text" placeholder="Descrição" />
+                            <input minLength={2} onChange={(e) => setTaskName(e.target.value)} type="text" placeholder="Nome/Categoria" />
+                            <input onChange={(e) => setTaskdescription(e.target.value)} type="text" placeholder="Descrição" />
                             <input className="done" type="submit" value={"OK"} />
                         </form>
                         <hr />

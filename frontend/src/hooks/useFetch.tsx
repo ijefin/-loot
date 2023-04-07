@@ -13,6 +13,7 @@ export const useFetch = () => {
     const [message, setMessage] = useState("")
     const [taskId, setTaskId] = useState()
 
+
     const httpConfig = (data: any, method: string) => {
         if (method === "POST") {
             setConfig({
@@ -36,6 +37,19 @@ export const useFetch = () => {
 
             setMethod(method)
             setTaskId(data)
+        }
+
+        if (method === "PUT") {
+            setConfig({
+                method,
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+
+            setMethod(method)
+            setTaskId(data.id)
         }
     }
 
@@ -83,11 +97,20 @@ export const useFetch = () => {
                 setCallFetch(json)
             }
 
+            if (method === "PUT") {
+                const res = await fetch(`${"http://localhost:3030/update-task"}/${taskId}`, config)
+                json = await res.json()
+
+                setMessage(json.message)
+                res.status === 400 ? toast.error(json.message) : toast.success(json.message)
+                setCallFetch(json)
+            }
+
             setCallFetch(json)
         }
 
         httpRequest()
-    }, [config, method])
+    }, [config, method, taskId])
 
     return { data, httpConfig, loading, error, message }
 
