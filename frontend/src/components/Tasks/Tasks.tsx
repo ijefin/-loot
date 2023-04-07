@@ -16,7 +16,6 @@ export const Tasks = () => {
 
     const { data: task, loading, error } = useFetch(url)
 
-    console.log(task)
 
 
     return (
@@ -24,7 +23,9 @@ export const Tasks = () => {
             <div className="container">
                 <div className="sub-container">
                     <div className="form-container">
-                        <label htmlFor=""><h3>Adicionar nova tarefa</h3></label>
+                        <label>
+                            <h3>Adicionar nova tarefa</h3>
+                        </label>
                         <form>
                             <input type="text" placeholder="Nome/Categoria" />
                             <input type="text" placeholder="Descrição" />
@@ -41,16 +42,14 @@ export const Tasks = () => {
                         <hr />
                         <div style={{ overflow: "auto" }} className="test">
                             <div className="task-container">
-                                <TaskCard name="test" description="test" />
-                                <TaskCard name="test" description="test" />
-                                <TaskCard name="test" description="test" />
-                                <TaskCard name="test" description="test" />
-                                <TaskCard name="test" description="test" />
-                                <TaskCard name="test" description="test" />
-                                <TaskCard name="test" description="test" />
-                                <TaskCard name="test" description="test" />
-                                <TaskCard name="test" description="test" />
-                                <TaskCard name="test" description="test" /> 
+                                <div className="task-card-container">
+                                    {loading && <h3>Carregando tarefas..</h3>}
+                                    {
+                                        task && task.map((tasks: task) => (
+                                            !tasks.done && <TaskCard name={tasks.name} description={tasks.description} />
+                                        ))
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,14 +64,8 @@ export const Tasks = () => {
 {/* <div className="task-container">
 <div className="task-status">
     <h3>Em progresso</h3>
-    {loading && <h3>Carregando tarefas..</h3>}
-    <div className="task-card-container">
-        {
-            task && task.map((tasks: task) => (
-                !tasks.done && <TaskCard name={tasks.name} description={tasks.description} />
-            ))
-        }
-    </div>
+
+   
 </div>
 <div className="task-status">
     <h3>Finalizadas</h3>
