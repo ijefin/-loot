@@ -1,10 +1,10 @@
 import { TaskCard } from "../Cards/TaskCard"
 import { useFetch } from "../../hooks/useFetch"
 import "./Tasks.css"
+import { useState } from "react"
 
 
 export const Tasks = () => {
-
     interface task {
         id: number
         name: string
@@ -12,11 +12,35 @@ export const Tasks = () => {
         done: boolean
     }
 
-    const url = "http://localhost:3030/all-tasks";
+    const { data: task, loading, error, httpConfig, message } = useFetch()
 
-    const { data: task, loading, error } = useFetch(url)
+    const [name, setTaskName] = useState(String)
+    const [description, setTaskdescription] = useState(String)
+    const [done, setDone] = useState(Boolean)
+    const [taskId, setTaskId]: any = useState()
 
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
 
+        const newTask = {
+            name,
+            description
+        }
+
+        httpConfig(newTask, "POST")
+
+        setTaskName("")
+        setTaskdescription("")
+    }
+
+    const handleDelete = (id: number) => {
+
+        setTaskId(id)
+
+        httpConfig(taskId, "DELETE")
+    }
+
+    console.log(taskId)
 
     return (
         <>
@@ -26,10 +50,10 @@ export const Tasks = () => {
                         <label>
                             <h3>Adicionar nova tarefa</h3>
                         </label>
-                        <form>
-                            <input type="text" placeholder="Nome/Categoria" />
-                            <input type="text" placeholder="Descrição" />
-                            <input className="done" type="submit" value={"Inserir"} />
+                        <form onSubmit={handleSubmit}>
+                            <input minLength={2} value={name} onChange={(e) => setTaskName(e.target.value)} type="text" placeholder="Nome/Categoria" />
+                            <input value={description} onChange={(e) => setTaskdescription(e.target.value)} type="text" placeholder="Descrição" />
+                            <input className="done" type="submit" value={"OK"} />
                         </form>
                         <hr />
                         <div className="menu">
@@ -46,7 +70,7 @@ export const Tasks = () => {
                                     {loading && <h3>Carregando tarefas..</h3>}
                                     {
                                         task && task.map((tasks: task) => (
-                                            !tasks.done && <TaskCard name={tasks.name} description={tasks.description} />
+                                            <TaskCard updateFunc={() => console.log(tasks)} deleteFunc={() => setTaskId(tasks.id)} key={tasks.id} name={tasks.name} description={tasks.description} />
                                         ))
                                     }
                                 </div>

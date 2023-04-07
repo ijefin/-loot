@@ -3,13 +3,15 @@ import { useState, useEffect } from "react"
 import { useFetch } from "../../hooks/useFetch"
 
 interface Task {
+    deleteFunc: any
+    updateFunc: any
     name: string
     description: string
     done?: boolean
 }
 
 
-export const TaskCard = ({ name, description, done }: Task) => {
+export const TaskCard = ({ updateFunc, deleteFunc, name, description, done }: Task) => {
     return (
         <>
             {
@@ -19,8 +21,10 @@ export const TaskCard = ({ name, description, done }: Task) => {
                         <div className="task-options">
                             <h4>{name}</h4>
                             <div className="task-crud">
-                                <button><i style={{ color: "#fc9003" }} className="fa-solid fa-pen-to-square"></i></button>
-                                <button><i style={{ color: "#fb1d00" }} className="fa-solid fa-trash"></i></button>
+                                <button onClick={updateFunc}><i style={{ color: "#fc9003" }} className="fa-solid fa-pen-to-square"></i></button>
+                                <button data-bs-toggle="modal"
+                                    data-bs-target="#myModal"
+                                    className="button btn m-1 text-light" onClick={deleteFunc}><i style={{ color: "#fb1d00" }} className="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
                     </div>

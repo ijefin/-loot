@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
+import { toast } from 'react-toastify';
 
 // custom hook
-export const useFetch = (url: string) => {
-
+export const useFetch = () => {
 
     const [data, setData]: any = useState()
     const [config, setConfig]: any = useState(null)
@@ -10,7 +10,8 @@ export const useFetch = (url: string) => {
     const [callFetch, setCallFetch] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
-    const [itemId, setItemId] = useState()
+    const [message, setMessage] = useState("")
+    const [taskId, setTaskId] = useState()
 
     const httpConfig = (data: any, method: string) => {
         if (method === "POST") {
@@ -34,7 +35,7 @@ export const useFetch = (url: string) => {
             })
 
             setMethod(method)
-            setItemId(data)
+            setTaskId(data)
         }
     }
 
@@ -42,39 +43,39 @@ export const useFetch = (url: string) => {
         const fetchData = async () => {
 
             setLoading(true)
-
             try {
-                const response = await fetch(url)
+                const response = await fetch("http://localhost:3030/all-tasks")
 
                 const json = await response.json()
                 setData(json)
 
-            } catch (error) {
-                console.log(error)
-                setError("Houve um erro ao carregar os dados")
+            } catch (error: any) {
+                toast.error("houve um erro")
             }
 
             setLoading(false)
         }
 
         fetchData()
-    }, [url, callFetch])
+    }, [callFetch])
 
     useEffect(() => {
         const httpRequest = async () => {
             let json
 
             if (method === "POST") {
-                let fetchOptions = [url, config] as const
+                let fetchOptions = ["http://localhost:3030/new-task", config] as const
 
                 const res = await fetch(...fetchOptions)
 
                 json = await res.json()
 
+                setMessage(json.message)
+                res.status !== 201 ? toast.error(json.message) : toast.success(json.message)
             }
 
             if (method === "DELETE") {
-                const res = await fetch(`${url}/${itemId}`, config)
+                const res = await fetch(`${"http://localhost:3030/delete-task"}/${taskId}`, config)
                 json = await res.json()
 
                 setCallFetch(json)
@@ -84,11 +85,9 @@ export const useFetch = (url: string) => {
 
         }
 
-
-
         httpRequest()
-    }, [config, method, url])
+    }, [config, method])
 
-    return { data, httpConfig, loading, error }
+    return { data, httpConfig, loading, error, message }
 
 }
