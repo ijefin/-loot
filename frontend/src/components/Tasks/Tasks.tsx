@@ -5,7 +5,8 @@ import { useState } from "react"
 
 
 export const Tasks = () => {
-    interface task {
+
+    interface Task {
         id: number
         name: string
         description: string
@@ -14,10 +15,12 @@ export const Tasks = () => {
 
     const { data: task, loading, error, httpConfig, message } = useFetch()
 
-    const [name, setTaskName] = useState(String)
-    const [description, setTaskdescription] = useState(String)
+    const [name, setTaskName] = useState("")
+    const [description, setTaskdescription] = useState("")
     const [done, setDone] = useState(Boolean)
-    const [taskId, setTaskId]: any = useState()
+    const [selectedTask, setSelectedTask]: Task | any = useState()
+    const [newName, setNewName] = useState()
+    const [newDescription, setNewDescription] = useState()
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
@@ -35,16 +38,21 @@ export const Tasks = () => {
 
     const handleDelete = () => {
 
-        const selectedId = taskId.id
+        const selectedId = selectedTask.id
 
         httpConfig(selectedId, "DELETE")
+    }
+
+    const handleUpdate = () => {
+
+        console.log(selectedTask)
     }
 
     return (
         <>
             <div
                 className="modal fade"
-                id="myModal"
+                id="delete-modal"
                 tabIndex={-1}
                 aria-labelledby="myModal"
                 aria-hidden="true"
@@ -63,8 +71,8 @@ export const Tasks = () => {
                             ></button>
                         </div>
                         <div className="modal-body">
-                            <h1>{taskId?.name}</h1>
-                            <p>{taskId?.description}</p>
+                            <h1>{selectedTask?.name}</h1>
+                            <p>{selectedTask?.description}</p>
                         </div>
                         <div className="modal-footer">
                             <button
@@ -81,6 +89,53 @@ export const Tasks = () => {
                                 className="btn"
                                 data-bs-dismiss="modal"
                                 onClick={handleDelete}
+                            >
+                                Confirmar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div >
+
+            <div
+                className="modal fade"
+                id="update-modal"
+                tabIndex={-1}
+                aria-labelledby="myModal"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="myModal">
+                                Atualizar tarefa
+                            </h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div className="modal-body">
+                            <input onChange={(e) => setTaskName(e.target.value)} defaultValue={selectedTask?.name} type="text" />
+                            <input onChange={(e) => setTaskdescription(e.target.value)} defaultValue={selectedTask?.description} type="text" />
+                        </div>
+                        <div className="modal-footer">
+                            <button
+                                type="button"
+                                className="btn btn-danger"
+                                data-bs-dismiss="modal"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                style={{ backgroundColor: "#22b700" }}
+                                id="modal-confirm"
+                                type="button"
+                                className="btn"
+                                data-bs-dismiss="modal"
+                                onClick={handleUpdate}
                             >
                                 Confirmar
                             </button>
@@ -113,8 +168,8 @@ export const Tasks = () => {
                                 <div className="task-card-container">
                                     {loading && <h3>Carregando tarefas..</h3>}
                                     {
-                                        task && task.map((tasks: task) => (
-                                            <TaskCard updateFunc={() => console.log(tasks)} deleteFunc={() => setTaskId(tasks)} key={tasks.id} name={tasks.name} description={tasks.description} />
+                                        task && task.map((tasks: Task) => (
+                                            <TaskCard getTaskInfo={() => setSelectedTask(tasks)} key={tasks.id} name={tasks.name} description={tasks.description} />
                                         ))
                                     }
                                 </div>
