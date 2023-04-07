@@ -44,6 +44,50 @@ export const Tasks = () => {
 
     return (
         <>
+            <div
+                className="modal fade"
+                id="myModal"
+                tabIndex={-1}
+                aria-labelledby="myModal"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="myModal">
+                                Deseja excluir essa tarefa?
+                            </h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div className="modal-body">
+                            Content
+                        </div>
+                        <div className="modal-footer">
+                            <button
+                                type="button"
+                                className="btn btn-danger"
+                                data-bs-dismiss="modal"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                style={{ backgroundColor: "#22b700" }}
+                                id="modal-confirm"
+                                type="button"
+                                className="btn"
+                                data-bs-dismiss="modal"
+                            >
+                                Confirmar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div >
             <div className="container">
                 <div className="sub-container">
                     <div className="form-container">
@@ -83,23 +127,3 @@ export const Tasks = () => {
 
     )
 }
-
-
-{/* <div className="task-container">
-<div className="task-status">
-    <h3>Em progresso</h3>
-
-   
-</div>
-<div className="task-status">
-    <h3>Finalizadas</h3>
-    {loading && <h3>Carregando tarefas..</h3>}
-    <div className="task-card-container">
-        {
-            task && task.map((tasks: task) => (
-                tasks.done && <TaskCard name={tasks.name} description={tasks.description} />
-            ))
-        }
-    </div>
-</div>
-</div> */}
