@@ -27,14 +27,7 @@ export const TaskCard = ({ name, description, done }: Task) => {
                         <div className="d-flex justify-content-start align-items-center">
                         </div>
                         <div className="d-flex justify-content-end">
-                            <div className="dropdown">
-                                <button id="dots" className="dropbtn"></button>
-                                <div className="dropdown-content">
-                                    <button >Concluir <i id='done' className="fa-solid fa-check"></i></button>
-                                    <button >Editar <i id='edit' className="fa-solid fa-edit"></i></button>
-                                    <button >Apagar <i id='delete' className="fa-solid fa-trash"></i></button>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -43,3 +36,12 @@ export const TaskCard = ({ name, description, done }: Task) => {
     )
 }
 
+
+{/* <div className="dropdown">
+<button id="dots" className="dropbtn"></button>
+<div className="dropdown-content">
+    <button >Concluir <i id='done' className="fa-solid fa-check"></i></button>
+    <button >Editar <i id='edit' className="fa-solid fa-edit"></i></button>
+    <button >Apagar <i id='delete' className="fa-solid fa-trash"></i></button>
+</div>
+</div> */}
