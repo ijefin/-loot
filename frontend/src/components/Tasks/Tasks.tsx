@@ -1,7 +1,7 @@
 import { TaskCard } from "../Cards/TaskCard"
 import { useFetch } from "../../hooks/useFetch"
 import "./Tasks.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 
 export const Tasks = () => {
@@ -18,7 +18,7 @@ export const Tasks = () => {
     const [name, setTaskName] = useState("")
     const [description, setTaskdescription] = useState("")
     const [done, setDone] = useState(Boolean)
-    const [selectedTask, setSelectedTask]: Task | any = useState()
+    const [selectedTask, setSelectedTask]: any = useState("")
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
@@ -34,19 +34,22 @@ export const Tasks = () => {
         setTaskdescription("")
     }
 
-    const handleDelete = () => {
+    const handleDelete = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
 
         const selectedId = selectedTask.id
 
         httpConfig(selectedId, "DELETE")
     }
 
-    const handleUpdate = () => {
+
+    const handleUpdate = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
 
         const updatedTask = {
             id: selectedTask.id,
-            name,
-            description
+            name: name ? name : selectedTask.name,
+            description: description ? description : selectedTask.description
         }
 
         httpConfig(updatedTask, "PUT")
