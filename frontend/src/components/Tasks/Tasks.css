@@ -1,6 +1,7 @@
 .container {
   display: flex;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,10 +58,27 @@ form {
   background-color: #4253af;
 }
 
+.task-options {
+  display: flex;
+}
+
+.task-crud {
+  display: flex;
+  justify-content: space-around;
+}
+.task-crud button {
+  margin: 2px;
+  background-color: #fff;
+  outline: none;
+  border: none;
+  color: #000;
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;

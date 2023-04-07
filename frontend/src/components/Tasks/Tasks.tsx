@@ -48,6 +48,9 @@ export const Tasks = () => {
                             <TaskCard name="test" description="test" />
                             <TaskCard name="test" description="test" />
                             <TaskCard name="test" description="test" />
+                            <TaskCard name="test" description="test" />
+                            <TaskCard name="test" description="test" />
+                            <TaskCard name="test" description="test" />
                         </div>
                     </div>
                 </div>
