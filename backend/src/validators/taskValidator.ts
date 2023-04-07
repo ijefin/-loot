@@ -1,8 +1,3 @@
-import { Response } from "express";
-import { TaskManager } from "../repositories/taskRepository";
-
-const taskManager = new TaskManager();
-
 export const verifyEmptyName = async (name: string) => {
   const nameIsValid = name.length < 1;
 
