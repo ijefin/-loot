@@ -43,7 +43,7 @@ export default class Tasks {
   };
 
   updateTask = async (req: Request, res: Response) => {
-    const { name, description } = req.body;
+    const { name, description, done, status } = req.body;
     const { id } = req.params;
     const service = new UpdateTaskService();
 
@@ -64,7 +64,13 @@ export default class Tasks {
       return;
     }
 
-    const updatedTask = await service.execute({ id, name, description });
+    const updatedTask = await service.execute({
+      id,
+      name,
+      description,
+      done,
+      status,
+    });
 
     return res
       .status(200)

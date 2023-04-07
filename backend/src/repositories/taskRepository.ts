@@ -33,13 +33,20 @@ export class TaskManager {
       name,
       description,
       done: false,
+      status: "Pendente",
     });
 
-  updateTask = async ({ id, name, description }: Partial<Task>) => {
+  updateTask = async ({
+    id,
+    name,
+    description,
+    done,
+    status,
+  }: Partial<Task>) => {
     taskRepository
       .createQueryBuilder()
       .update(Task)
-      .set({ name: name, description: description })
+      .set({ name: name, description: description, done: done, status: status })
       .where("id = :id", { id })
       .execute();
   };

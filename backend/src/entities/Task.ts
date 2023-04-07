@@ -13,4 +13,7 @@ export class Task {
 
   @Column({ type: "boolean" })
   done: boolean;
+
+  @Column({ type: "text" })
+  status: string;
 }
