@@ -1,34 +1,16 @@
-.top-content {
-  margin-top: 5vh;
-  background-color: #3206f5;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.top-content .task-search input {
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  background-color: #fff;
-  width: 25vh;
-  padding: 5px;
-  caret-color: #3206f5;
-}
-
-.top-content .new-task button {
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  background-color: #03a832;
-  width: 15vh;
-  padding: 5px;
+.box {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  z-index: 1000;
+  right: 20rem;
+  bottom: 10rem;
 }
 
 .task-container {
-  background-color: #edf0f8; 
+  border-radius: 15px;
+  margin-top: 5vh;
+  background-color: #edf0f8;
   min-height: 70vh;
   color: #000;
   display: flex;
@@ -52,31 +34,14 @@
   margin: 10px;
 }
 
-@media only screen and (max-width: 950px) {
-  .top-content {
-    margin-top: 5vh;
-    background-color: #3206f5;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
-
-  .top-content .task-search input {
-    width: 15vh;
-    padding: 3px;
-    caret-color: #3206f5;
-  }
-
-  .top-content .new-task button {
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    background-color: #59cf06;
-    width: 10vh;
-  }
-}
-
-@media screen and (min-width: 600px) and (orientation: landscape) {
+.one {
+  width: 220px;
+  background-color: #070707;
+  justify-content: center;
+  color: #fff;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 10px;
 }
