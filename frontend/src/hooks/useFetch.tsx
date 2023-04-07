@@ -78,11 +78,12 @@ export const useFetch = () => {
                 const res = await fetch(`${"http://localhost:3030/delete-task"}/${taskId}`, config)
                 json = await res.json()
 
+                setMessage(json.message)
+                res.status === 400 ? toast.error(json.message) : toast.success(json.message)
                 setCallFetch(json)
             }
 
             setCallFetch(json)
-
         }
 
         httpRequest()
