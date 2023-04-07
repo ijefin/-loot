@@ -39,7 +39,14 @@ export const Tasks = () => {
                             </ul>
                         </div>
                         <hr />
-                        <div className="task-container">
+                        <div style={{ overflow: "auto" }} className="task-container">
+                            <TaskCard name="test" description="test" />
+                            <TaskCard name="test" description="test" />
+                            <TaskCard name="test" description="test" />
+                            <TaskCard name="test" description="test" />
+                            <TaskCard name="test" description="test" />
+                            <TaskCard name="test" description="test" />
+                            <TaskCard name="test" description="test" />
                             <TaskCard name="test" description="test" />
                         </div>
                     </div>
