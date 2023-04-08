@@ -135,9 +135,15 @@ export const Tasks = () => {
                                 setIsDirty(false)
                                 setTaskName(e.target.value)
                             }} defaultValue={selectedTask?.name} type="text" />
-                            <input onChange={(e) => setTaskdescription(e.target.value)} defaultValue={selectedTask?.description} type="text" />
+                            <input onChange={(e) => {
+                                setIsDirty(false)
+                                setTaskdescription(e.target.value)
+                            }} defaultValue={selectedTask?.description} type="text" />
                             <label htmlFor="done-checkbox">Marcar como concluído.</label>
-                            <input id="done-checkbox" checked={isChecked} onChange={() => setIsChecked(!isChecked)} className="form-check-input" type="checkbox" />
+                            <input id="done-checkbox" checked={isChecked} onChange={() => {
+                                setIsDirty(false)
+                                setIsChecked(!isChecked)
+                            }} className="form-check-input" type="checkbox" />
                         </div>
                         <div className="modal-footer">
                             <button
@@ -191,7 +197,7 @@ export const Tasks = () => {
                                             <TaskCard getTaskInfo={() => {
                                                 setSelectedTask(tasks)
                                                 setIsChecked(tasks.done)
-                                            }} key={tasks.id} name={tasks.name} description={tasks.description} />
+                                            }} status={tasks.status} key={tasks.id} name={tasks.name} description={tasks.description} />
                                         ))
                                     }
                                 </div>

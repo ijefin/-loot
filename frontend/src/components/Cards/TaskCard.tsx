@@ -7,11 +7,12 @@ interface Task {
     name: string
     description: string
     done?: any
+    status: string
 }
 
 
 
-export const TaskCard = ({ getTaskInfo, name, description, done }: Task) => {
+export const TaskCard = ({ getTaskInfo, name, description, done, status }: Task) => {
 
     return (
         <>
@@ -20,6 +21,9 @@ export const TaskCard = ({ getTaskInfo, name, description, done }: Task) => {
                     <div className="task-title">
                         <div className="task-options">
                             <h4>{name}</h4>
+                            {
+                                status === "Concluida" && <div style={{ color: "green" }}>{status}  <i className="fa-solid fa-check"></i></div>
+                            }
                             <div className="task-crud">
                                 <button data-bs-toggle="modal"
                                     data-bs-target="#update-modal"
