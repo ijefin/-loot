@@ -11,16 +11,19 @@ export const Tasks = () => {
         name: string
         description: string
         done: boolean
+        status: string
     }
+
 
     const { data: task, loading, error, httpConfig, message } = useFetch()
 
     const [name, setTaskName] = useState("")
+    const [done, setDone] = useState(false);
     const [description, setTaskdescription] = useState("")
     const [selectedTask, setSelectedTask]: any = useState("")
     const [isChecked, setIsChecked] = useState(false);
+    const [tasks, setTasks] = useState<Task[]>([])
 
-    console.log(selectedTask.done)
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
@@ -31,7 +34,6 @@ export const Tasks = () => {
         }
 
         httpConfig(newTask, "POST")
-
         setTaskName("")
         setTaskdescription("")
     }
@@ -43,8 +45,7 @@ export const Tasks = () => {
 
         httpConfig(selectedId, "DELETE")
     }
-    const handleUpdate = async (e: { preventDefault: () => void }) => {
-        e.preventDefault();
+    const handleUpdate = async () => {
 
         const updatedTask = {
             id: selectedTask.id,
@@ -58,10 +59,7 @@ export const Tasks = () => {
 
         setTaskName("");
         setTaskdescription("");
-    };
-
-    const handleOnChange = () => {
-        setIsChecked(!isChecked);
+        setDone(false)
     };
 
     return (
@@ -136,7 +134,7 @@ export const Tasks = () => {
                             <input onChange={(e) => setTaskName(e.target.value)} defaultValue={selectedTask?.name} type="text" />
                             <input onChange={(e) => setTaskdescription(e.target.value)} defaultValue={selectedTask?.description} type="text" />
                             <label htmlFor="done-checkbox">Marcar como concluído.</label>
-                            <input id="done-checkbox" onChange={handleOnChange} className="form-check-input" type="checkbox" />
+                            <input id="done-checkbox" checked={isChecked} onChange={() => setIsChecked(!isChecked)} className="form-check-input" type="checkbox" />
                         </div>
                         <div className="modal-footer">
                             <button
@@ -186,7 +184,10 @@ export const Tasks = () => {
                                     {loading && <h3>Carregando tarefas..</h3>}
                                     {
                                         task && task.map((tasks: Task) => (
-                                            <TaskCard done={handleOnChange} getTaskInfo={() => setSelectedTask(tasks)} key={tasks.id} name={tasks.name} description={tasks.description} />
+                                            <TaskCard getTaskInfo={() => {
+                                                setSelectedTask(tasks)
+                                                setIsChecked(tasks.done)
+                                            }} key={tasks.id} name={tasks.name} description={tasks.description} />
                                         ))
                                     }
                                 </div>
