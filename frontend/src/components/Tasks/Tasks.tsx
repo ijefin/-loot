@@ -3,7 +3,6 @@ import { useFetch } from "../../hooks/useFetch"
 import "./Tasks.css"
 import { useEffect, useState } from "react"
 
-
 export const Tasks = () => {
 
     interface Task {
@@ -14,7 +13,6 @@ export const Tasks = () => {
         status: string
     }
 
-
     const { data: task, loading, error, httpConfig, message } = useFetch()
 
     const [name, setTaskName] = useState("")
@@ -22,7 +20,7 @@ export const Tasks = () => {
     const [description, setTaskdescription] = useState("")
     const [selectedTask, setSelectedTask]: any = useState("")
     const [isChecked, setIsChecked] = useState(false);
-    const [tasks, setTasks] = useState<Task[]>([])
+    const [isDirty, setIsDirty] = useState(true);
 
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
@@ -33,9 +31,11 @@ export const Tasks = () => {
             description
         }
 
-        httpConfig(newTask, "POST")
-        setTaskName("")
-        setTaskdescription("")
+        httpConfig(newTask, "POST", () => {
+            setTaskName("");
+            setTaskdescription("");
+        });
+
     }
 
     const handleDelete = async (e: { preventDefault: () => void; }) => {
@@ -131,7 +131,10 @@ export const Tasks = () => {
                             ></button>
                         </div>
                         <div className="modal-body">
-                            <input onChange={(e) => setTaskName(e.target.value)} defaultValue={selectedTask?.name} type="text" />
+                            <input onChange={(e) => {
+                                setIsDirty(false)
+                                setTaskName(e.target.value)
+                            }} defaultValue={selectedTask?.name} type="text" />
                             <input onChange={(e) => setTaskdescription(e.target.value)} defaultValue={selectedTask?.description} type="text" />
                             <label htmlFor="done-checkbox">Marcar como concluído.</label>
                             <input id="done-checkbox" checked={isChecked} onChange={() => setIsChecked(!isChecked)} className="form-check-input" type="checkbox" />
@@ -151,6 +154,7 @@ export const Tasks = () => {
                                 className="btn"
                                 data-bs-dismiss="modal"
                                 onClick={handleUpdate}
+                                disabled={isDirty}
                             >
                                 Confirmar
                             </button>
@@ -165,8 +169,8 @@ export const Tasks = () => {
                             <h3>Adicionar nova tarefa</h3>
                         </label>
                         <form onSubmit={handleSubmit}>
-                            <input minLength={2} onChange={(e) => setTaskName(e.target.value)} type="text" placeholder="Nome/Categoria" />
-                            <input onChange={(e) => setTaskdescription(e.target.value)} type="text" placeholder="Descrição" />
+                            <input minLength={2} value={name} onChange={(e) => setTaskName(e.target.value)} type="text" placeholder="Nome/Categoria" />
+                            <input minLength={2} value={description} onChange={(e) => setTaskdescription(e.target.value)} type="text" placeholder="Descrição" />
                             <input className="done" type="submit" value={"OK"} />
                         </form>
                         <hr />

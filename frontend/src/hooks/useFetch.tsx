@@ -14,7 +14,7 @@ export const useFetch = () => {
     const [taskId, setTaskId] = useState()
 
 
-    const httpConfig = (data: any, method: string) => {
+    const httpConfig = (data: any, method: string, callback?: () => void) => {
         if (method === "POST") {
             setConfig({
                 method,
@@ -37,6 +37,10 @@ export const useFetch = () => {
 
             setMethod(method)
             setTaskId(data)
+        }
+
+        if (callback) {
+            callback();
         }
 
         if (method === "PUT") {
