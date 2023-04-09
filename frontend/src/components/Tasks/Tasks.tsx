@@ -1,7 +1,7 @@
 import { TaskCard } from "../Cards/TaskCard"
 import { useFetch } from "../../hooks/useFetch"
 import "./Tasks.css"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export const Tasks = () => {
 
@@ -33,8 +33,8 @@ export const Tasks = () => {
         }
 
         httpConfig(newTask, "POST", () => {
-            setTaskName("");
             setTaskdescription("");
+            setTaskName("");
         });
 
     }
@@ -191,24 +191,16 @@ export const Tasks = () => {
                             <input className="done" type="submit" value={"OK"} />
                         </form>
                         <hr />
-                        <div className="menu">
-                            <ul>
-                                <li>Todas</li>
-                                <li>Pendentes</li>
-                                <li>Concluidas</li>
-                            </ul>
-                        </div>
-                        <hr />
                         <div style={{ overflow: "auto" }}>
                             <div className="task-container">
                                 <div className="task-card-container">
                                     {loading && <h3>Carregando tarefas..</h3>}
                                     {
-                                        task && task.map((tasks: Task) => (
+                                        task?.length > 0 ? task.map((tasks: Task) => (
                                             <TaskCard getTaskInfo={() => {
                                                 handleSetValues(tasks.name, tasks.description, tasks.id, tasks.done)
                                             }} status={tasks.status} key={tasks.id} name={tasks.name} description={tasks.description} />
-                                        ))
+                                        )) : <h1 style={{ textAlign: "center" }}>Nada por aqui!</h1>
                                     }
                                 </div>
                             </div>
