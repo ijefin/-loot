@@ -1,6 +1,4 @@
 import "./TaskCard.css"
-import { useState, useEffect } from "react"
-import { useFetch } from "../../hooks/useFetch"
 
 interface Task {
     getTaskInfo?: any

@@ -60,7 +60,7 @@ export const Tasks = () => {
             name: selectedTaskName,
             description: selectedTaskDescription,
             done: isChecked,
-            status: isChecked ? "Concluida" : "pending",
+            status: isChecked ? "Concluida" : "Pendente",
         };
 
         httpConfig(updatedTask, "PUT", () => {
@@ -199,7 +199,7 @@ export const Tasks = () => {
                             </ul>
                         </div>
                         <hr />
-                        <div style={{ overflow: "auto" }} className="test">
+                        <div style={{ overflow: "auto" }}>
                             <div className="task-container">
                                 <div className="task-card-container">
                                     {loading && <h3>Carregando tarefas..</h3>}
@@ -207,7 +207,6 @@ export const Tasks = () => {
                                         task && task.map((tasks: Task) => (
                                             <TaskCard getTaskInfo={() => {
                                                 handleSetValues(tasks.name, tasks.description, tasks.id, tasks.done)
-                                                console.log({ tasks })
                                             }} status={tasks.status} key={tasks.id} name={tasks.name} description={tasks.description} />
                                         ))
                                     }
