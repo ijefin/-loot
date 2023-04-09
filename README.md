@@ -20,8 +20,6 @@ Você precisará ter todos os programas listados abaixo instalados em sua máqui
 
 1. Depois de configurar seu postgres, abra o arquivo .ENV localizado em backend/.env utilizando seu editor de código (VS Code, Pycharm ou outro), e configure as variáveis de ambiente conforme solicitadas as chaves.
 
-   ​	![image-20230409163518535](C:\Users\Jeff\AppData\Roaming\Typora\typora-user-images\image-20230409163518535.png)
-
    Onde:
 
    DB_HOST="localhost" //Host utilizado para acessar o servidor (Pode deixar como padrão)
@@ -45,14 +43,7 @@ Você precisará ter todos os programas listados abaixo instalados em sua máqui
 4. Pronto, você já pode rodar o servidor utilizando o comando `yarn dev`.
 
 
-
-![image-20230409164623172](C:\Users\Jeff\AppData\Roaming\Typora\typora-user-images\image-20230409164623172.png)
-
-
-
 Você pode fazer requisições manuais para o servidor utilizando Insomnia ou Postman, abaixo está uma breve descrição dos endpoints.
-
-
 
 - **GET** - *localhost:3030/all-tasks*
 
@@ -77,7 +68,6 @@ Você pode fazer requisições manuais para o servidor utilizando Insomnia ou Po
   
 
 # Configurando o Frontend
-
 
 
 1. Na pasta raiz do projeto front-end, abra o terminal e digite `yarn install` para instalar as dependências necessárias e logo depois `yarn dev` para rodar o projeto. :)
