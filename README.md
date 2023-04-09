@@ -22,22 +22,20 @@ Você precisará ter todos os programas listados abaixo instalados em sua máqui
 
    Onde:
 
-   DB_HOST="localhost" //Host utilizado para acessar o servidor (Pode deixar como padrão)
+   `DB_HOST="localhost" //Host utilizado para acessar o servidor (Pode deixar como padrão)`
 
-   DB_PORT=5432 //Porta onde o servidor do banco de dados irá rodar (Por padrão é a 5432)
+   `DB_PORT=5432 //Porta onde o servidor do banco de dados irá rodar (Por padrão é a 5432)`
 
-   DB_USER="postgres" //Nome de usuário configurado no Postgre SQL
+   `DB_USER="postgres" //Nome de usuário configurado no Postgre SQL`
 
-   DB_PASS="postgres" //Senha configurad no Postgre SQL
+   `DB_PASS="postgres" //Senha configurad no Postgre SQL`
 
-   DB_NAME="lootgames" // Nome do banco de dados criado no POSTGRE ( NOTE QUE VOCÊ DEVE CRIAR UM BANCO, A MIGRATION NÃO CONSEGUE CRIAR AUTOMATICAMENTE.)
+   `DB_NAME="lootgames" // Nome do banco de dados criado no POSTGRE ( NOTE QUE VOCÊ DEVE CRIAR UM BANCO, A MIGRATION NÃO CONSEGUE CRIAR AUTOMATICAMENTE.)`
 
    PORT=3030 //Porta  de onde o servidor irá rodar, (Pode alterar caso seja necessário)
    
-
 2. Feito a configuração do banco de dados e do arquivo ENV, com o terminal aberto na pasta raiz do BACKEND, digite `npm install` para instalar as dependências necessárias. (**NÃO UTILIZE `yarn --i` POIS ALGUMAS DEPENDÊNCIAS FORAM INSTALADAS UTILIZANDO O NPM!**) 
    
-
 3. Você também precisará gerar o arquivo de migrations utilizando o comando `yarn migration:generate` e logo depois `yarn migration:run` para rodar as migrations e criar as tabelas no banco de dados. (Você pode acessar todos os scripts dentro do arquivo `package.json`)
 
 4. Pronto, você já pode rodar o servidor utilizando o comando `yarn dev`.
