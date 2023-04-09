@@ -43,9 +43,9 @@ Você precisará ter todos os programas listados abaixo instalados em sua máqui
 
 Você pode fazer requisições manuais para o servidor utilizando Insomnia ou Postman, abaixo está uma breve descrição dos endpoints.
 
-- **GET** - *localhost:3030/all-tasks*
+- **GET** - `localhost:3030/all-tasks`
 
-- **POST** - *localhost:3030/new-task* 
+- **POST** - `localhost:3030/new-task` 
 
   passando no body em json o seguinte objeto:
 
@@ -54,14 +54,14 @@ Você pode fazer requisições manuais para o servidor utilizando Insomnia ou Po
   	"description": "Criar uma tarefa de exemplo."
   }
 
-- **PUT** - *localhost:3030/update-task/{ID}*
+- **PUT** - `localhost:3030/update-task/{ID}`
 
   {
   	"name": "Atualizar",
   	"description": "Atualizando essa tarefa"
   }
 
-- **DELETE**  - localhost:3030/delete-task/{id}
+- **DELETE**  - `localhost:3030/delete-task/{id}`
 
   
 
