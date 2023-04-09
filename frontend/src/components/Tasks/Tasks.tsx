@@ -18,10 +18,11 @@ export const Tasks = () => {
     const [name, setTaskName] = useState("")
     const [done, setDone] = useState(false);
     const [description, setTaskdescription] = useState("")
-    const [selectedTask, setSelectedTask]: any = useState("")
+    const [selectedTaskName, setSelectedTaskName] = useState("");
+    const [selectedTaskDescription, setSelectedTaskDescription] = useState("");
+    const [selectedTaskId, setSelectedTaskID]: any = useState();
     const [isChecked, setIsChecked] = useState(false);
     const [isDirty, setIsDirty] = useState(true);
-
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
@@ -38,28 +39,38 @@ export const Tasks = () => {
 
     }
 
+    const handleSetValues = (name: string, description: string, id: number, done: boolean) => {
+        setSelectedTaskName(name)
+        setSelectedTaskDescription(description)
+        setSelectedTaskID(id)
+        setIsChecked(done)
+    }
+
     const handleDelete = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
 
-        const selectedId = selectedTask.id
+        const selectedId = selectedTaskId
 
         httpConfig(selectedId, "DELETE")
     }
     const handleUpdate = async () => {
 
         const updatedTask = {
-            id: selectedTask.id,
-            name: name ? name : selectedTask.name,
-            description: description ? description : selectedTask.description,
+            id: selectedTaskId,
+            name: selectedTaskName,
+            description: selectedTaskDescription,
             done: isChecked,
             status: isChecked ? "Concluida" : "pending",
         };
 
-        httpConfig(updatedTask, "PUT");
-
-        setTaskName("");
-        setTaskdescription("");
-        setDone(false)
+        httpConfig(updatedTask, "PUT", () => {
+            setTaskName("");
+            setTaskdescription("");
+            setSelectedTaskName("")
+            setSelectedTaskDescription("")
+            setSelectedTaskID("")
+            setDone(false)
+        });
     };
 
     return (
@@ -85,8 +96,8 @@ export const Tasks = () => {
                             ></button>
                         </div>
                         <div className="modal-body">
-                            <h1>{selectedTask?.name}</h1>
-                            <p>{selectedTask?.description}</p>
+                            <h1>{selectedTaskName}</h1>
+                            <p>{selectedTaskDescription}</p>
                         </div>
                         <div className="modal-footer">
                             <button
@@ -133,12 +144,12 @@ export const Tasks = () => {
                         <div className="modal-body">
                             <input onChange={(e) => {
                                 setIsDirty(false)
-                                setTaskName(e.target.value)
-                            }} defaultValue={selectedTask?.name} type="text" />
+                                setSelectedTaskName(e.target.value)
+                            }} value={selectedTaskName} type="text" />
                             <input onChange={(e) => {
                                 setIsDirty(false)
-                                setTaskdescription(e.target.value)
-                            }} defaultValue={selectedTask?.description} type="text" />
+                                setSelectedTaskDescription(e.target.value)
+                            }} value={selectedTaskDescription} type="text" />
                             <label htmlFor="done-checkbox">Marcar como concluído.</label>
                             <input id="done-checkbox" checked={isChecked} onChange={() => {
                                 setIsDirty(false)
@@ -195,8 +206,8 @@ export const Tasks = () => {
                                     {
                                         task && task.map((tasks: Task) => (
                                             <TaskCard getTaskInfo={() => {
-                                                setSelectedTask(tasks)
-                                                setIsChecked(tasks.done)
+                                                handleSetValues(tasks.name, tasks.description, tasks.id, tasks.done)
+                                                console.log({ tasks })
                                             }} status={tasks.status} key={tasks.id} name={tasks.name} description={tasks.description} />
                                         ))
                                     }
