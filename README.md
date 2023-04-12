@@ -72,4 +72,4 @@ Você pode fazer requisições manuais para o servidor utilizando Insomnia ou Po
 
 
 
-###### Made @[jefinskts](https://www.instagram.com/jefinskts/)
+###### Made by @[jefinskts](https://www.instagram.com/jefinskts/)
